@@ -63,11 +63,12 @@ try {
     
             $appArtifactPath = Join-Path $basePath $appUri.AbsolutePath
             $exists = Test-Path $appArtifactPath
+            $appManifestPath = Join-Path $appArtifactPath "manifest.json"
             if ($exists -and $force) {
                 Remove-Item $appArtifactPath -Recurse -Force
                 $exists = $false
             }
-            if ($exists -and $forceRedirection) {
+            if ($exists -and $forceRedirection -and (Test-Path $appManifestPath)) {
                 $appManifestPath = Join-Path $appArtifactPath "manifest.json"
                 $appManifest = Get-Content $appManifestPath | ConvertFrom-Json
                 if ($appManifest.PSObject.Properties.name -eq "applicationUrl") {
@@ -130,7 +131,6 @@ try {
             }
             try { [System.IO.File]::WriteAllText((Join-Path $appArtifactPath 'lastused'), "$([datetime]::UtcNow.Ticks)") } catch {}
 
-            $appManifestPath = Join-Path $appArtifactPath "manifest.json"
             if (Test-Path $appManifestPath) {
                 $appManifest = Get-Content $appManifestPath | ConvertFrom-Json
 
