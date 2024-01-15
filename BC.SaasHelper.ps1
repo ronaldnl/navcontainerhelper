@@ -1,5 +1,6 @@
 # SaaS specific functions
 . (Join-Path $PSScriptRoot "Saas\Copy-BcEnvironment.ps1")
+. (Join-Path $PSScriptRoot "Saas\Get-BcEnvironmentAvailableAppUpdates.ps1")
 . (Join-Path $PSScriptRoot "Saas\Get-BcEnvironmentDatabaseExportHistory.ps1")
 . (Join-Path $PSScriptRoot "Saas\Get-BcEnvironments.ps1")
 . (Join-Path $PSScriptRoot "Saas\Get-BcEnvironmentAvailableRestorePeriods.ps1")
